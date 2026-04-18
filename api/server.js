@@ -50,7 +50,7 @@ app.post('/api/registro', async (req, res) => {
 
 
 app.get('/', (req, res) => {
-  res.send('Bienvenidos a mi API con Express');
+  res.send('Bienvenidos a mi API desplegada en Render');
 });
 
 app.get('/saludo', verificarToken, async (req, res) => {
