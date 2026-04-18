@@ -1,0 +1,167 @@
+/* ── Footer — surface-deep, cierre con peso visual ── */
+.footer {
+    width: 100%;
+    background: var(--surface-deep);
+    box-sizing: border-box;
+}
+
+/* Grid de 3 columnas */
+.footer-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    padding: 32px 8%;
+    align-items: center;
+}
+
+/* ── Columna izquierda: identidad ── */
+.footer-col--identity {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Monograma */
+.footer-logo {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    background: var(--cta-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+.footer-tagline {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 0.78rem;
+    color: var(--on-dim);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* ── Columna central: disponibilidad ── */
+.footer-col--center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.footer-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-bg);
+    padding: 7px 16px;
+    border-radius: 9999px;
+    font-family: 'Space Grotesk', 'Courier New', monospace;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04rem;
+    text-transform: uppercase;
+    color: var(--on-surface);
+}
+
+.footer-status-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--primary);
+    flex-shrink: 0;
+    animation: footer-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes footer-pulse {
+    0%, 100% { opacity: 1;   transform: scale(1); }
+    50%       { opacity: 0.3; transform: scale(1.6); }
+}
+
+.footer-location {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 0.80rem;
+    color: var(--on-dim);
+    margin: 0;
+}
+
+/* ── Columna derecha: contacto ── */
+.footer-col--contact {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 8px;
+}
+
+.footer-contact-label {
+    font-family: 'Space Grotesk', 'Courier New', monospace;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.10rem;
+    text-transform: uppercase;
+    color: var(--on-muted);
+    margin: 0;
+}
+
+.footer-email {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+    word-break: break-all;
+    text-align: right;
+}
+
+.footer-email:hover { opacity: 0.70; }
+
+/* ── Línea inferior: copyright ── */
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 8%;
+    background: rgba(0, 0, 0, 0.20);
+    font-family: 'Space Grotesk', 'Courier New', monospace;
+    font-size: 0.68rem;
+    color: var(--on-muted);
+    letter-spacing: 0.03rem;
+    box-sizing: border-box;
+}
+
+.footer-stack {
+    color: var(--on-dim);
+    letter-spacing: 0.06rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 28px 6%;
+        text-align: center;
+    }
+    .footer-col--center { align-items: center; }
+    .footer-col--contact { align-items: center; }
+    .footer-email { text-align: center; }
+    .footer-bottom {
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px 6%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-grid { padding: 24px 5%; }
+    .footer-logo { font-size: 1.2rem; }
+    .footer-bottom { padding: 10px 5%; font-size: 0.62rem; }
+}
+
+@media (min-width: 1400px) {
+    .footer-grid { padding: 40px 12%; }
+    .footer-bottom { padding: 14px 12%; }
+}
