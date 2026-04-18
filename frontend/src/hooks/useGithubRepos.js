@@ -6,7 +6,8 @@ import { useState, useEffect } from 'react';
 const API_URL = import.meta.env.VITE_API_URL
   ? `${import.meta.env.VITE_API_URL}/api/repos`
   : '/api/repos';
-
+  /* console.log('API_URL:', API_URL); */
+  
 export const useGithubRepos = () => {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
