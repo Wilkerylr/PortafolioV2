@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/CEPAVCSS/portafolio-Wilkerylr#readme",
   "devDependencies": {
-    "concurrently": "^9.2.1"
+    "concurrently": "^9.2.1",
+    "vite": "^7.3.2"
   }
 }
