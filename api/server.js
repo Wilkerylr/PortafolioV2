@@ -131,13 +131,35 @@ app.post('/api/login', async (req, res) => {
 // Obtiene TODOS los proyectos desde Supabase
 app.get('/api/proyectos', async (req, res) => {
   try {
-    const {data, error} = await supabase
+    const { data, error } = await supabase
       .from('Proyectos')
-      .select('*');
+      .select(`
+        id,
+        nombre,
+        descripcion,
+        created_at,
+        link,
+        proyecto_tags (
+          tags (
+            id,
+            nombre
+          )
+        )
+      `)
+      .order('created_at', { ascending: false });
+
     if (error) throw error;
-    res.status(200).json({ proyectos: data });
+
+    // Opcional: "Limpiar" la respuesta para que los tags sean un array simple
+    const proyectosFormateados = data.map(proyecto => ({
+      ...proyecto,
+      tags: proyecto.proyecto_tags.map(pt => pt.tags.nombre_tag)
+    }));
+
+    res.status(200).json(proyectosFormateados);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error(error);
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -211,6 +233,7 @@ app.get('/api/repos', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 const PORT = process.env.PORT || 3000;
 
