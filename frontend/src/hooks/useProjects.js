@@ -19,13 +19,9 @@ export const useProjects = () => {
         const response = await fetch(API_URL);
         if (!response.ok) throw new Error(`Error ${response.status}`);
         const data = await response.json();
-        console.log('Respuesta del API:', data);
         
         // Asegurarse de que data sea un array
         const projectsArray = Array.isArray(data) ? data : (data.proyectos || []);
-        
-        console.log('Cantidad de proyectos:', projectsArray.length);
-        console.log('Datos crudos del API:', projectsArray);
         
         // Transformar los datos del API al formato esperado por ProjectCard
         const transformedProjects = projectsArray.map(project => {
@@ -42,9 +38,6 @@ export const useProjects = () => {
             created_at: project.created_at
           };
         });
-        
-        console.log('Datos transformados:', transformedProjects);
-        console.log('Primer proyecto (solo tags):', transformedProjects[0]?.tags);
         
         setProjects(transformedProjects);
       } catch (err) {
