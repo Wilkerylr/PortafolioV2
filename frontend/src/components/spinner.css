@@ -1,0 +1,70 @@
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  min-height: 200px;
+}
+
+.spinner {
+  position: relative;
+  width: 48px;
+  height: 48px;
+}
+
+.spinner.small {
+  width: 24px;
+  height: 24px;
+}
+
+.spinner.medium {
+  width: 48px;
+  height: 48px;
+}
+
+.spinner.large {
+  width: 64px;
+  height: 64px;
+}
+
+.spinner-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border: 3px solid transparent;
+  border-top-color: var(--primary, #38BDF8);
+  border-radius: 50%;
+  animation: spin 1.2s linear infinite;
+}
+
+.spinner-ring:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.spinner-ring:nth-child(2) {
+  width: 75%;
+  height: 75%;
+  top: 12.5%;
+  left: 12.5%;
+  border-top-color: var(--primary-dark, #0EA5E9);
+  animation-delay: 0.15s;
+  animation-direction: reverse;
+}
+
+.spinner-ring:nth-child(3) {
+  width: 50%;
+  height: 50%;
+  top: 25%;
+  left: 25%;
+  border-top-color: var(--accent-line, #38BDF8);
+  animation-delay: 0.3s;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

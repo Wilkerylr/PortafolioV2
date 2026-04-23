@@ -139,6 +139,7 @@ app.get('/api/proyectos', async (req, res) => {
         descripcion,
         created_at,
         link,
+        imagen,
         proyecto_tags (
           tags (
             id,
@@ -153,7 +154,7 @@ app.get('/api/proyectos', async (req, res) => {
     // Opcional: "Limpiar" la respuesta para que los tags sean un array simple
     const proyectosFormateados = data.map(proyecto => ({
       ...proyecto,
-      tags: proyecto.proyecto_tags.map(pt => pt.tags.nombre_tag)
+      tags: proyecto.proyecto_tags.map(pt => pt.tags.nombre)
     }));
 
     res.status(200).json(proyectosFormateados);

@@ -4,6 +4,12 @@ import '../styles/ProjectCard.css';
 // Componente de tarjeta de proyecto con layout horizontal, preparado para carrusel
 // Para agregar imagen: pasa el prop `image` con la ruta y se mostrará automáticamente
 const ProjectCard = ({ title, description, tags, link, image }) => {
+  console.log('ProjectCard props:', { title, description, tags, link, image });
+  console.log('Tags info:', {
+    isArray: Array.isArray(tags),
+    length: tags?.length,
+    values: tags
+  });
   return (
     <div className="project-card">
 
@@ -20,18 +26,16 @@ const ProjectCard = ({ title, description, tags, link, image }) => {
 
       {/* Panel derecho: información del proyecto */}
       <div className="project-card-right">
-        <p className="project-card-label">Proyecto Destacado</p>
+        <div className="project-card-tags">
+          {Array.isArray(tags) && tags.length > 0 && tags.map((tag, i) => (
+            <span key={i} className="project-tag">{tag}</span>
+          ))}
+        </div>
 
         <h3 className="project-card-title">{title}</h3>
 
         <div className="project-card-desc-box">
           <p className="project-card-description">{description}</p>
-        </div>
-
-        <div className="project-card-tags">
-          {tags.map((tag, i) => (
-            <span key={i} className="project-tag">{tag}</span>
-          ))}
         </div>
 
         {link && (

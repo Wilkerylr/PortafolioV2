@@ -5,8 +5,6 @@ const ThemeToggle = ({ theme, onToggle }) => (
     className={theme === 'claro' ? 'right' : ''}
     onClick={onToggle}
   >
-    <span className="toggle-icon toggle-icon--moon">🌙  </span>
-    <span className="toggle-icon toggle-icon--sun">☀️</span>
   </button>
 );
 
