@@ -120,3 +120,103 @@
     border-radius: 5px;
 }
 
+/* ✅ RESPONSIVE NAVBAR */
+
+/* Tablet y pantallas medianas */
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 0.8rem 3%;
+    }
+
+    .logo {
+        font-size: 1.25rem;
+    }
+
+    .navbar-right {
+        gap: 3px;
+    }
+
+    .reloj-display {
+        font-size: 1.1rem;
+        padding: 4px 10px;
+    }
+
+    #tema_Change {
+        width: 55px;
+        height: 32px;
+    }
+
+    #tema_Change::before {
+        width: 20px;
+        height: 20px;
+        left: 4px;
+    }
+
+    #tema_Change.right::before {
+        left: calc(100% - 25px);
+    }
+
+    #iniciales {
+        width: 35px;
+        height: 32px;
+        font-size: 1rem;
+    }
+}
+
+/* Teléfonos móviles */
+@media screen and (max-width: 576px) {
+    .navbar {
+        padding: 0.7rem 2%;
+    }
+
+    .logo {
+        font-size: 1.1rem;
+    }
+
+    .navbar-right {
+        gap: 2px;
+    }
+
+    /* Ocultar el reloj en pantallas muy pequeñas */
+    .reloj-display {
+        display: none;
+    }
+
+    .edit-proyectos button {
+        margin: 0 5px;
+    }
+
+    #tema_Change {
+        width: 50px;
+        height: 30px;
+    }
+
+    #tema_Change::before {
+        width: 18px;
+        height: 18px;
+        left: 3px;
+    }
+
+    #tema_Change.right::before {
+        left: calc(100% - 22px);
+    }
+
+    #iniciales {
+        width: 32px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+}
+
+/* Teléfonos pequeños */
+@media screen and (max-width: 380px) {
+    .navbar {
+        padding: 0.6rem 1.5%;
+    }
+
+    .logo {
+        font-size: 1rem;
+    }
+}
+
+
