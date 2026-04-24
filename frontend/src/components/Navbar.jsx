@@ -12,6 +12,8 @@ const Navbar = ({ theme, onToggleTheme }) => {
   const [showLogin, setShowLogin] = useState(false);
   // 2. Estado de la barra lateral
   const [isOpen, setIsOpen] = useState(false);
+  // 3. Contador de clicks para boton oculto de administracion
+  const [clickCount, setClickCount] = useState(0);
 
   return (
     <>
@@ -23,7 +25,21 @@ const Navbar = ({ theme, onToggleTheme }) => {
         {/* Tu línea vertical camuflada */}
         <div className='edit-proyectos'>
           <button 
-            onClick={() => setIsOpen (true)} 
+            onClick={() => {
+              const newCount = clickCount + 1;
+              setClickCount(newCount);
+              
+              // Si llega a 5 clicks mostramos el sidebar y reseteamos contador
+              if (newCount >= 5) {
+                setIsOpen(true);
+                setClickCount(0);
+              }
+              
+              // Resetear contador despues de 2 segundos sin clicks
+              setTimeout(() => {
+                setClickCount(0);
+              }, 2000);
+            }} 
             title="Admin Access"
           ></button>
         </div>
