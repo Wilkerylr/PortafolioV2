@@ -1,5 +1,5 @@
-import AvatarPlaceholder from './AvatarPlaceholder.jsx';
 import '../styles/Hero.css';
+import fotoTraje from '/FotoTraje.jpg';
 
 // Componente de sección hero con presentación personal
 // Recibe theme desde App para mantener una sola fuente de verdad
@@ -7,9 +7,13 @@ const Hero = ({ theme }) => {
   return (
     <section id="inicio" className="hero">
       <div className="hero-content">
-        {/* Avatar de perfil - reemplazar AvatarPlaceholder por <img> cuando tengas foto */}
+        {/* Avatar de perfil con fotografía personal */}
         <div className="hero-left">
-          <AvatarPlaceholder theme={theme} />
+          <img 
+            src={fotoTraje} 
+            alt="Wilker Lopez - Desarrollador" 
+            className="hero-img avatar-photo"
+          />
         </div>
 
         {/* Texto de presentación */}

@@ -36,12 +36,13 @@
 }
 
 .hero-img {
-    width: 180px;
-    height: 180px;
-    border-radius: 10%;
+    width: 260px;
+    height: 260px;
+    border-radius: 12%;
     object-fit: cover;
     flex-shrink: 0;
-    border: solid 1.5px var(--accent-line);
+    border: solid 2px var(--accent-line);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 /* Nombre — gradiente como text-fill */
@@ -133,7 +134,7 @@
     }
     .hero-tags { justify-content: center; }
     .hero-right { display: flex; flex-direction: column; align-items: center; }
-    .avatar-placeholder, .hero-img { width: 130px; height: 130px; }
+    .avatar-placeholder, .hero-img { width: 170px; height: 170px; }
     .hero-right h1 { font-size: 1.8rem; }
 }
 
@@ -147,7 +148,7 @@
 
 @media (min-width: 1400px) {
     .hero-content { max-width: 1200px; gap: 80px; }
-    .avatar-placeholder, .hero-img { width: 220px; height: 220px; }
+    .avatar-placeholder, .hero-img { width: 320px; height: 320px; }
     .hero-right h1 { font-size: 2.8rem; }
     .hero-bio { font-size: 1.05rem; max-width: 560px; }
 }
