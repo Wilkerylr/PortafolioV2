@@ -40,7 +40,7 @@ const Navbar = ({ theme, onToggleTheme }) => {
                 setClickCount(0);
               }, 2000);
             }} 
-            title="Admin Access"
+          
           ></button>
         </div>
       </div>
