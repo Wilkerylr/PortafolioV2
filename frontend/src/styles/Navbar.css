@@ -58,9 +58,15 @@
   width: 100%;
 }
 
-@media (max-width: 1024px) {
+.navbar-nav {
+  display: flex !important;
+  gap: 1.5rem;
+  margin: 0 1.5rem;
+}
+
+@media (max-width: 900px) {
   .navbar-nav {
-    display: none;
+    display: none !important;
   }
 }
 
