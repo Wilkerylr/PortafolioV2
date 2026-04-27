@@ -12,7 +12,12 @@ const Skills = () => {
     const fetchSkills = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/skills');
+        
+        const API_URL = import.meta.env.VITE_API_URL
+          ? `${import.meta.env.VITE_API_URL}/api/skills`
+          : "/api/skills";
+
+        const response = await fetch(API_URL);
         
         if (!response.ok) {
           throw new Error('Error al cargar habilidades');
@@ -21,6 +26,7 @@ const Skills = () => {
         const data = await response.json();
         setSkillCategories(data);
       } catch (err) {
+        console.error('Error cargando skills:', err);
         setError(err.message);
       } finally {
         setLoading(false);
