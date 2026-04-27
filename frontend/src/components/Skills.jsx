@@ -51,7 +51,7 @@ const Skills = () => {
           <h2>Habilidades Tecnológicas</h2>
           <SectionBadge text="⚠️ Error" />
         </div>
-        <p style={{ textAlign: 'center', color: 'var(--on-dim)' }}>
+        <p style={{ textAlign: 'center', color: 'var(--text-secondary)' }}>
           No se pudieron cargar las habilidades
         </p>
       </section>
