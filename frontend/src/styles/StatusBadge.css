@@ -32,7 +32,14 @@
     white-space: nowrap;
 }
 
-@media (max-width: 600px) {
+/* ❌ ELIMINADO: Este breakpoint rompia la logica de prioridad acordada
+   ✅ Ahora se respeta estrictamente:
+      > 850px  = Todo visible
+      700-850px = Solo texto del status oculto
+      < 700px  = StatusBadge completamente oculto
+*/
+
+@media (max-width: 850px) {
     .status-text { display: none; }
     .status-badge { padding: 6px 8px; }
 }
