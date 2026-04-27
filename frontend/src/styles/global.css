@@ -76,15 +76,15 @@
     --on-primary:     #FFFFFF;
 
     --surface:        #FFFFFF;
-    --surface-alt:    #F3F4F6;
+    --surface-alt:    #F1F5F9;
     --surface-deep:   #1F2937;
     --card-bg:        #FFFFFF;
-    --card-hover:     #F9FAFB;
-    --inset-bg:       #F3F4F6;
+    --card-hover:     #E0E7FF;
+    --inset-bg:       #E2E8F0;
 
-    --on-surface:     #111827;
-    --on-dim:         #6B7280;
-    --on-muted:       #9CA3AF;
+    --on-surface:     #0F172A;
+    --on-dim:         #334155;
+    --on-muted:       #475569;
 
     --cta-gradient:   linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
     --accent-line:    #4F46E5;
@@ -94,6 +94,8 @@
     --tag-bg:         #EEF2FF;
     --tag-text:       #4F46E5;
     --badge-bg:       #EEF2FF;
+    --tooltip-bg:     #84b2fd;
+    --tooltip-text:   #000000;
     --progress-bar:   linear-gradient(90deg, #4F46E5, #7C3AED);
 }
 

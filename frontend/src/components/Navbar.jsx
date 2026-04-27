@@ -43,6 +43,14 @@ const Navbar = ({ theme, onToggleTheme }) => {
           
           ></button>
         </div>
+
+        <nav className="navbar-nav">
+          <a href="#inicio" className="nav-link">Inicio</a>
+          <a href="#habilidades" className="nav-link">Habilidades</a>
+          <a href="#proyectos" className="nav-link">Proyectos</a>
+          <a href="#repositorios" className="nav-link">Repositorios</a>
+        </nav>
+
       </div>
       <div className="navbar-right">
         <StatusBadge />
@@ -53,18 +61,6 @@ const Navbar = ({ theme, onToggleTheme }) => {
 
       <ReadingProgress />
 
-      {/* 2. Renderizado condicional del Login */}
-      {showLogin && (
-        <div className="login-overlay" onClick={() => setShowLogin(false)}>
-          <div className="login-modal" onClick={(e) => e.stopPropagation()}>
-            {/* El e.stopPropagation evita que el modal se cierre al hacer clic dentro de él */}
-            <Login />
-            <button className="close-btn" onClick={() => setShowLogin(false)}>
-              Cerrar
-            </button>
-          </div>
-        </div>
-      )}
     </nav>
       {/* 3. Renderizado condicional de la barra lateral */}
       <Sidebar isOpen={isOpen} onClose={() => setIsOpen(false)} />

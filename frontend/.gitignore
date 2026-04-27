@@ -29,5 +29,8 @@ yarn-error.log*
 *.temp
 .cache/
 
+# Archivos de pruebas
+PLAN_DE_TEST.md
+
 # Coverage
 coverage/

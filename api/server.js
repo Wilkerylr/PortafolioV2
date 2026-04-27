@@ -15,9 +15,10 @@ const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_PUB
 app.use(express.json());
 app.use(cors());
 
+//Practica de registro de usuarios con hash de contraseña y verificación de existencia previa en Supabase
 app.post('/api/registro', async (req, res) => {
   try {
-    const { nombre, email, password} = req.body;
+    const { nombre, email, password, rol } = req.body;
 
     // Verificar si el usuario ya existe
     const { data: usuarioExistente } = await supabase
@@ -36,7 +37,7 @@ app.post('/api/registro', async (req, res) => {
     // Insertar el nuevo usuario
     const { data, error } = await supabase
       .from('Usuarios')
-      .insert([{ nombre, email, password: hashedPassword }])
+      .insert([{ nombre, email, password: hashedPassword, rol: rol || 'user' }])
       .select();
 
     if (error) throw error;
@@ -48,11 +49,12 @@ app.post('/api/registro', async (req, res) => {
 });
 
 
-
+// Ruta de prueba para verificar que el servidor está funcionando
 app.get('/', (req, res) => {
   res.send('Bienvenidos a mi API desplegada en Render');
 });
 
+// Ruta protegida que requiere token JWT para acceder
 app.get('/saludo', verificarToken, async (req, res) => {
   const usuario = req.usuario; // El usuario verificado por el middleware
   res.json({ saludo: 'Hola, este es un saludo desde mi API', usuario });
@@ -114,13 +116,13 @@ app.post('/api/login', async (req, res) => {
       {
         id: usuario.id,
         nombre: usuario.nombre,
-        email: usuario.email,
+        email: usuario.email
       },
       JWT_SECRET,
       { expiresIn: '1h' }
     );
 
-    res.json({ mensaje: 'Login exitoso', token });
+    res.json({ mensaje: 'Login exitoso', token, rol: 'admin' });
   } catch (error) {
     console.error('Login error:', error);
     res.status(400).json({ error: error.message || 'Error en login' });
@@ -195,7 +197,7 @@ app.delete('/api/proyectos/:id', async (req, res) => {
   }
 });
 
-
+// Actualiza un proyecto por ID
 app.put('/api/proyectos/:id', async (req, res) => {
   try {
     const {data, error} = await supabase
@@ -232,6 +234,67 @@ app.get('/api/repos', async (req, res) => {
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
+  }
+});
+
+// Endpoint para obtener habilidades agrupadas por tipo
+app.get('/api/skills', async (req, res) => {
+  try {
+    const { data: tiposData, error: errorTipos } = await supabase
+      .from('tipo')
+      .select(`
+        id,
+        nombre_tipo,
+        tipos_tags (
+          tags (nombre)
+        )
+      `)
+      .order('id', { ascending: true });
+
+    // 1. Agregamos 'descripcion' a la consulta de habilidades_tecnicas
+    const { data: habilidadesData, error: errorHabs } = await supabase
+      .from('habilidades_tecnicas')
+      .select('nombre, categoria, descripcion'); 
+
+    if (errorTipos || errorHabs) throw errorTipos || errorHabs;
+
+    const respuestaFinal = tiposData.map(cat => {
+      // Tags de proyectos (convertidos a objeto con descripción vacía para mantener consistencia)
+      const tags = cat.tipos_tags.map(rel => ({
+        name: rel.tags?.nombre,
+        description: null 
+      })).filter(t => t.name);
+      
+      // 2. Mapeamos las habilidades técnicas incluyendo su descripción
+      const tecnicas = habilidadesData.filter(h => {
+        const catHabilidad = h.categoria?.toLowerCase();
+        const tituloTarjeta = cat.nombre_tipo.toLowerCase();
+
+        if (tituloTarjeta === 'backend' || tituloTarjeta === 'frontend') {
+          return catHabilidad === 'programación' || catHabilidad === 'programacion';
+        }
+        if (tituloTarjeta === 'electronica') {
+          return catHabilidad === 'electrónica' || catHabilidad === 'electronica' || catHabilidad === 'sistemas/iot' || catHabilidad === 'seguridad/iot';
+        }
+        if (tituloTarjeta === 'herramientas') {
+          return catHabilidad === 'herramientas';
+        }
+        return false;
+      }).map(h => ({
+        name: h.nombre,
+        description: h.descripcion // <--- Aquí incluimos la nueva descripción
+      }));
+
+      return {
+        title: cat.nombre_tipo,
+        // Combinamos ambos y eliminamos duplicados por nombre
+        allSkills: [...tags, ...tecnicas]
+      };
+    });
+
+    res.status(200).json(respuestaFinal);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 

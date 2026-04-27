@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
-
+import { useLogin } from '../hooks/useLogin';
 
 const LoginForm = ({ onLogin }) => {
-  const [credentials, setCredentials] = useState({ email: '', password: '' });
+  const { email, setEmail, password, setPassword, handleLogin, error, loading } = useLogin(onLogin);
 
   const handleChange = (e) => {
-    setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    if (e.target.name === "email") {
+      setEmail(e.target.value);
+    } else if (e.target.name === "password") {
+      setPassword(e.target.value);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí iría tu lógica de validación o llamada a API
-    console.log("Iniciando sesión con:", credentials);
-    onLogin(); 
+    
+    console.log("Iniciando sesión con:", { email, password });
+    handleLogin(e);
   };
 
   return (
@@ -22,17 +26,26 @@ const LoginForm = ({ onLogin }) => {
         name="email" 
         type="email" 
         placeholder="Correo" 
-        onChange={handleChange} 
+        onChange={handleChange}
+        autoComplete="email"
+        value={email}
         required 
       />
       <input 
         name="password" 
         type="password" 
         placeholder="Contraseña" 
-        onChange={handleChange} 
+        onChange={handleChange}
+        autoComplete="current-password"
+        value={password}
         required 
       />
-      <button type="submit">Entrar</button>
+
+      {error && <p className="login-error">{error}</p>}
+
+      <button type="submit" disabled={loading}>
+        {loading ? "Iniciando sesión..." : "Entrar"}
+      </button>
     </form>
   );
 };

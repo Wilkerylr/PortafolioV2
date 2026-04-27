@@ -7,7 +7,7 @@ const Footer = () => (
     <div className="footer-grid">
       <div className="footer-col footer-col--identity">
         <span className="footer-logo">WL</span>
-        <p className="footer-tagline">Fullstack Developer<br />& Electronics Tech</p>
+        <p className="footer-tagline">Desarrollador Fullstack<br />& Técnico Electrónico</p>
       </div>
       <div className="footer-col footer-col--center">
         <div className="footer-status">

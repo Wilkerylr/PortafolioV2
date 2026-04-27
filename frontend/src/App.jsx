@@ -1,9 +1,11 @@
 import { useTheme } from './hooks/useTheme';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
+import Skills from './components/Skills.jsx';
 import Projects from './components/Projects.jsx';
 import Repositories from './components/Repositories.jsx';
 import Footer from './components/Footer.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 import './styles/global.css';
 
 function App() {
@@ -14,9 +16,11 @@ function App() {
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <Hero theme={theme} />
+        <Skills />
         <Projects />
         <Repositories />
         <Footer />
+        <ScrollToTop />
       </main>
     </>
   );

@@ -24,8 +24,8 @@ const Hero = ({ theme }) => {
             <span>🐍 Python Certificado</span>
             <span>⚛️ React Dev</span>
           </div>
-          <p className="hero-bio">Más de 3 años en sistemas de control de acceso. Programador certificado en Python con manejo de bases de datos y APIs. Actualmente especializándome en desarrollo web Fullstack con React y Node.js.</p>
-          <a href="#repositorios" className="btn-main">Ver Repositorios</a>
+          <p className="hero-bio">Técnico en Electrónica con +3 años de experiencia implementando sistemas de control de acceso. Programador certificado en Python, especializado en desarrollo de APIs y gestión de bases de datos. Actualmente expandiendo conocimientos en desarrollo web Fullstack con React y Node.js.</p>
+          <a href="mailto:Lopezrewilker12@gmail.com" className="btn-main">Contactar</a>
         </div>
       </div>
     </section>
