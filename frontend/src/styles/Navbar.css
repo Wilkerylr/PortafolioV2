@@ -197,29 +197,20 @@
 }
 
 @media screen and (max-width: 500px) {
-    .navbar-nav {
-        gap: 0.6rem;
-        margin: 0 0.5rem;
-    }
-    .nav-link {
-        font-size: 0.75rem;
-    }
-}
-
-/* ✅ MODIFICADO: Botones de navegacion siempre visibles, NUNCA se ocultan
-   Ahora la prioridad quedara:
-   > 1050px = Todo
-   850-1050px = Sin Reloj
-   < 850px = Siempre visible Logo + Navegacion + Tema
-*/
-
-@media screen and (max-width: 500px) {
     .navbar {
         padding: 0.7rem 4%;
     }
 
     .logo {
         font-size: 1rem;
+    }
+
+    .navbar-nav {
+        gap: 0.6rem;
+        margin: 0 0.5rem;
+    }
+    .nav-link {
+        font-size: 0.75rem;
     }
 
     #tema_Change {
