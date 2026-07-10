@@ -124,8 +124,8 @@
 .skill-tooltip {
   background: var(--tooltip-bg, var(--card-hover));
   color: var(--tooltip-text, var(--on-surface));
-  padding: 0.6rem 0.8rem 0.8rem 0.8rem;
-  border-radius: 0 8px 8px 8px;
+  padding: 0.6rem 0.8rem 0.8rem;
+  border-radius: 0 8px 8px;
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 1.5;
