@@ -1,15 +1,28 @@
 import { useGithubRepos } from '../hooks/useGithubRepos';
 import RepoCard from './RepoCard.jsx';
+import SectionHeader from './SectionHeader.jsx';
 import '../styles/Repositories.css';
 
 const Repositories = () => {
-  const { repos, loading, error } = useGithubRepos();
+  const { repos, loading, error, retry } = useGithubRepos();
 
   return (
     <section id="repositorios" className="repositorios">
-      <h2>Repositorios de GitHub</h2>
-      {loading && <p className="repo-status">Cargando repositorios...</p>}
-      {error && <p className="repo-status repo-error">Error: {error}</p>}
+      <SectionHeader index="02" title="Repositorios" note="// fuente: api.github" />
+
+      {loading && (
+        <p className="repo-status" role="status">
+          <span className="loader" aria-hidden="true" /> ESCANEANDO REPOSITORIOS...
+        </p>
+      )}
+
+      {error && (
+        <div className="repo-error">
+          <p>// ERROR: NO SE PUEDE ACCEDER A GITHUB AHORA MISMO</p>
+          <button className="btn btn--ghost btn--sm" onClick={retry}>REINTENTAR</button>
+        </div>
+      )}
+
       <div className="repo-grid">
         {repos.map((repo) => (
           <RepoCard key={repo.id} {...repo} />

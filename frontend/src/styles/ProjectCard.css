@@ -1,105 +1,112 @@
-/* Projects — misma capa que hero (surface), continuidad visual */
+/* ── Projects — misma capa que hero (surface), continuidad visual ── */
 .proyectos-section {
-    padding: 72px 11%;
+    padding: 72px 11% 40px;
     background: var(--surface);
 }
 
-.proyectos-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
-}
-
-.proyectos-header h2 {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--on-surface);
-    margin: 0;
-}
-
 .proyectos-aviso {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 0.88rem;
-    color: var(--on-dim);
-    margin: 8px 0 0;
-    font-style: italic;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+    color: var(--dim);
+    margin: 18px 0 0;
 }
+
+.proyectos-error {
+    color: var(--signal);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.proyectos-error p { margin: 0; }
 
 .grid-proyectos {
     display: flex;
     flex-direction: column;
-    gap: 48px;
-    margin-top: 40px;
+    gap: 56px;
+    margin-top: 44px;
 }
 
-/* Card — card-bg flota sobre surface */
+/* ── Card — pieza + sombra dura offset ── */
 .project-card {
     display: flex;
     align-items: center;
     gap: 40px;
     width: 100%;
-    min-height: 280px;
+    min-height: 260px;
     position: relative;
-    border-radius: 16px;
-    padding: 32px;
-    background: var(--card-bg);
-    transition: background 0.3s ease;
+    padding: 30px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    box-shadow: 6px 6px 0 var(--hard-shadow);
     box-sizing: border-box;
-}
-
-/* Ambient glow al hover */
-.project-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    background: radial-gradient(
-        ellipse at 50% 50%,
-        rgba(var(--primary-rgb), 0.10) 0%,
-        transparent 70%
-    );
-    filter: blur(50px);
-    opacity: 0;
-    transition: opacity 0.45s ease;
-    z-index: 0;
-    pointer-events: none;
+    transition: background 0.2s ease, transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .project-card:hover {
     background: var(--card-hover);
 }
 
-.project-card:hover::after { opacity: 1; }
+.project-card:active {
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0 var(--hard-shadow);
+}
+
+/* Marcas de registro TL + BR */
+.project-card::before,
+.project-card::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.project-card::before {
+    top: 7px;
+    left: 7px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+}
+
+.project-card::after {
+    bottom: 7px;
+    right: 7px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+}
 
 .project-card:nth-child(even) { flex-direction: row-reverse; }
 
-/* Contenido sobre el glow */
 .project-card-left,
 .project-card-right {
-    position: relative;
-    z-index: 1;
     flex: 1;
     min-width: 0;
 }
 
-/* Preview — inset-bg, más profundo que card */
+/* ── Preview — pantalla de instrumento ── */
 .project-card-preview {
     width: 100%;
     aspect-ratio: 16 / 9;
-    background: var(--inset-bg);
-    border-radius: 10px;
+    background: var(--inset);
+    border: 1px solid var(--rule);
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     overflow: hidden;
-    transition: background 0.3s ease;
 }
 
-.project-card:hover .project-card-preview {
-    background: var(--surface-alt);
+.project-card-preview::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--grid-line) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 16px 16px;
 }
 
 .project-preview-img {
@@ -108,65 +115,73 @@
     object-fit: cover;
     position: absolute;
     inset: 0;
-    border-radius: 10px;
 }
 
 .project-preview-icon {
-    width: 55%;
-    max-width: 180px;
-    color: var(--primary);
-    opacity: 0.15;
+    width: 62%;
+    max-width: 220px;
+    color: var(--accent);
     position: relative;
     z-index: 1;
-    transition: opacity 0.3s ease;
+    stroke-width: 1.5;
 }
 
-.project-card:hover .project-preview-icon { opacity: 0.40; }
+/* Traza animada del osciloscopio */
+.scope-trace {
+    stroke-dasharray: 640;
+    stroke-dashoffset: 640;
+    animation: scope-draw 5s linear infinite;
+}
 
-/* Panel derecho */
+.scope-node {
+    animation: tick-blink 1.1s steps(2, start) infinite;
+}
+
+@keyframes scope-draw {
+    0%   { stroke-dashoffset: 640; }
+    55%  { stroke-dashoffset: 0; }
+    100% { stroke-dashoffset: 0; }
+}
+
+/* ── Panel derecho ── */
 .project-card-right {
     display: flex;
     flex-direction: column;
     gap: 14px;
 }
 
-/* Label eyebrow */
 .project-card-label {
-    font-family: 'Space Grotesk', 'Courier New', monospace;
-    font-size: 0.70rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
     font-weight: 700;
-    letter-spacing: 0.14rem;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--primary);
+    color: var(--accent);
     margin: 0;
 }
 
-/* Título */
 .project-card-title {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 1.35rem;
     font-weight: 700;
-    color: var(--on-surface);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--text);
     margin: 0;
     line-height: 1.2;
+    overflow-wrap: anywhere;
 }
 
-/* Desc box — inset-bg, hundido dentro de card */
 .project-card-desc-box {
-    background: var(--inset-bg);
-    border-radius: 8px;
-    padding: 16px;
-    transition: background 0.3s ease;
-}
-
-.project-card:hover .project-card-desc-box {
-    background: var(--surface-alt);
+    background: var(--inset);
+    border-left: 2px solid var(--accent);
+    padding: 14px 16px;
 }
 
 .project-card-description {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 0.90rem;
-    color: var(--on-dim);
+    font-family: var(--font-mono);
+    font-size: 0.84rem;
+    color: var(--dim);
     line-height: 1.75;
     margin: 0;
 }
@@ -179,59 +194,65 @@
 }
 
 .project-tag {
-    font-family: 'Space Grotesk', 'Courier New', monospace;
-    font-size: 0.70rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
     font-weight: 700;
-    letter-spacing: 0.04rem;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--tag-text);
-    background: var(--tag-bg);
-    padding: 4px 12px;
-    border-radius: 9999px;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 5px 10px;
 }
 
-/* Botón CTA */
+.project-tag::before {
+    content: '#';
+    color: var(--accent);
+    margin-right: 5px;
+}
+
+/* Botón */
 .project-card-btn {
     display: inline-block;
     align-self: flex-start;
-    padding: 10px 24px;
-    background: var(--cta-gradient);
-    color: var(--on-primary);
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 0.88rem;
+    padding: 11px 22px;
+    background: var(--accent);
+    color: var(--on-accent);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
     font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     text-decoration: none;
-    border-radius: 8px;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    border: 1px solid var(--accent);
+    box-shadow: 4px 4px 0 var(--text);
+    transition: transform 0.12s ease, box-shadow 0.12s ease, opacity 0.2s ease;
 }
 
 .project-card-btn:hover {
-    opacity: 0.88;
-    transform: translateY(-2px);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--text);
+}
+
+.project-card-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 0 0 0 var(--text);
 }
 
 /* ── Responsive ── */
-@media (max-width: 480px) {
-    .proyectos-section { padding: 48px 5%; }
-    .proyectos-header h2 { font-size: 1.3rem; }
-    .grid-proyectos { gap: 28px; margin-top: 24px; }
-    .project-card { padding: 20px; gap: 20px; }
-    .project-card-title { font-size: 1.1rem; }
-    .project-card-desc-box { padding: 12px; }
-}
-
 @media (max-width: 900px) {
-    .proyectos-section { padding: 56px 6%; }
+    .proyectos-section { padding: 56px 6% 40px; }
     .project-card,
     .project-card:nth-child(even) {
         flex-direction: column;
-        gap: 20px;
+        gap: 24px;
     }
-    .project-card-title { font-size: 1.3rem; }
+    .project-card-title { font-size: 1.15rem; }
 }
 
-@media (min-width: 1400px) {
-    .proyectos-section { padding: 88px 12%; }
-    .project-card { gap: 60px; min-height: 320px; }
-    .project-card-title { font-size: 1.75rem; }
+@media (max-width: 480px) {
+    .proyectos-section { padding: 48px 5% 40px; }
+    .grid-proyectos { gap: 40px; margin-top: 32px; }
+    .project-card { padding: 22px; gap: 20px; }
+    .project-card-title { font-size: 1rem; }
 }

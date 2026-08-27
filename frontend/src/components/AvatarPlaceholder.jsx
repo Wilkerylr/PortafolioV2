@@ -3,8 +3,8 @@ import { initials } from '@dicebear/collection';
 import { useMemo } from 'react';
 
 const THEME_COLORS = {
-  oscuro: { background: ['1C2333'], textColor: ['38BDF8'] },
-  claro:  { background: ['EEF2FF'], textColor: ['4F46E5'] },
+  oscuro: { background: ['141714'], textColor: ['4AE28C'] },
+  claro:  { background: ['F4F0E6'], textColor: ['1B1A15'] },
 };
 
 const AvatarPlaceholder = ({ theme }) => {

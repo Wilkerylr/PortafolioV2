@@ -1,32 +1,88 @@
-/* Hero — capa base, pantalla completa */
+/* ── Hero — banco de pruebas, retícula de fondo ── */
 .hero {
+    position: relative;
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: var(--hero-gradient);
-    padding-top: 80px;
+    padding: 96px 5% 56px;
     box-sizing: border-box;
-    border-bottom: 3px dashed var(--accent-line);
+}
+
+/* Regla inferior de medición */
+.hero::after {
+    content: '';
+    position: absolute;
+    bottom: 24px;
+    left: 5%;
+    right: 5%;
+    height: 7px;
+    opacity: 0.55;
+    background-image:
+        repeating-linear-gradient(90deg, var(--rule) 0 1px, transparent 1px 12px),
+        repeating-linear-gradient(90deg, var(--accent) 0 2px, transparent 2px 6px);
+    background-blend-mode: multiply;
+}
+
+/* Coordenada en esquina */
+.hero-coord {
+    position: absolute;
+    top: 92px;
+    left: 5%;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    color: var(--muted);
 }
 
 .hero-content {
-    max-width: 1000px;
-    width: 90%;
+    max-width: 1040px;
+    width: 100%;
     display: flex;
     align-items: center;
-    gap: 52px;
+    gap: 56px;
     text-align: left;
 }
 
-/* Avatar */
-.avatar-placeholder {
-    width: 180px;
-    height: 180px;
-    border-radius: 10%;
-    overflow: hidden;
+/* ── Identificación (avatar) ── */
+.hero-avatar {
+    position: relative;
+    width: 190px;
     flex-shrink: 0;
-    background: var(--card-bg);
+}
+
+/* Marcas de registro TL/BR en el marco */
+.hero-avatar::before,
+.hero-avatar::after {
+    content: '';
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    z-index: 1;
+}
+
+.hero-avatar::before {
+    top: -5px;
+    left: -5px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+}
+
+.hero-avatar::after {
+    bottom: 2px;
+    right: -5px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+}
+
+.avatar-placeholder {
+    width: 190px;
+    height: 190px;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    display: block;
 }
 
 .avatar-placeholder svg {
@@ -35,86 +91,96 @@
     display: block;
 }
 
-.hero-img {
-    width: 180px;
-    height: 180px;
-    border-radius: 10%;
-    object-fit: cover;
-    flex-shrink: 0;
-    border: solid 1.5px var(--accent-line);
+.hero-avatar-id {
+    margin-top: 12px;
+    display: block;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.60rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dim);
 }
 
-/* Nombre — gradiente como text-fill */
-.highlight {
-    background: var(--cta-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+/* ── Presentación ── */
+.hero-kicker {
+    font-family: var(--font-mono);
+    font-size: 0.76rem;
+    letter-spacing: 0.20em;
+    color: var(--accent);
+    margin: 0 0 10px;
 }
 
-/* Título */
 .hero-right h1 {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 2.2rem;
-    font-weight: 800;
-    color: var(--on-surface);
-    margin: 0 0 4px;
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-family: var(--font-mono);
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--text);
+    margin: 0;
+    line-height: 1.08;
 }
 
-/* Tags de habilidades */
+.hl {
+    color: var(--accent);
+    background: none;
+    -webkit-text-fill-color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+}
+
+/* Chips de especialidad — cuadrados, con prefijo # */
 .hero-tags {
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin: 14px 0;
+    margin: 22px 0;
 }
 
 .hero-tags span {
-    font-family: 'Space Grotesk', 'Courier New', monospace;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.05rem;
-    text-transform: uppercase;
-    color: var(--tag-text);
-    background: var(--tag-bg);
-    padding: 5px 14px;
-    border-radius: 9999px;
-}
-
-/* Bio — accent-line como borde izquierdo */
-.hero-bio {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 0.95rem;
-    color: var(--on-dim);
-    line-height: 1.8;
-    margin: 0;
-    max-width: 480px;
-    width: 100%;
-    padding-left: 16px;
-    border-left: 2px solid var(--accent-line);
-    box-sizing: border-box;
-}
-
-/* CTA — gradiente, texto sobre primario */
-.btn-main {
-    display: inline-block;
-    margin-top: 24px;
-    padding: 12px 32px;
-    background: var(--cta-gradient);
-    color: var(--on-primary);
-    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
     font-weight: 700;
-    font-size: 0.95rem;
-    text-decoration: none;
-    border-radius: 8px;
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 6px 12px;
 }
 
-.btn-main:hover {
-    opacity: 0.88;
-    transform: translateY(-2px);
+.hero-tags span::before {
+    content: '#';
+    color: var(--accent);
+    margin-right: 6px;
+}
+
+/* Bio — anotación de laboratorio */
+.hero-bio {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--dim);
+    line-height: 1.75;
+    margin: 0;
+    max-width: 520px;
+    padding-left: 16px;
+    border-left: 2px solid var(--accent);
+}
+
+.hero-bio::before {
+    content: '// BIO_';
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    color: var(--accent);
+    margin-bottom: 6px;
+}
+
+/* CTA en hero */
+.hero .btn {
+    margin-top: 30px;
 }
 
 /* ── Responsive ── */
@@ -122,32 +188,27 @@
     .hero-content {
         flex-direction: column;
         text-align: center;
-        gap: 28px;
+        gap: 34px;
     }
     .hero-bio {
         max-width: 100%;
         border-left: none;
-        border-top: 2px solid var(--accent-line);
+        border-top: 2px solid var(--accent);
         padding-left: 0;
         padding-top: 14px;
+        text-align: left;
     }
     .hero-tags { justify-content: center; }
     .hero-right { display: flex; flex-direction: column; align-items: center; }
-    .avatar-placeholder, .hero-img { width: 130px; height: 130px; }
-    .hero-right h1 { font-size: 1.8rem; }
+    .avatar-placeholder { width: 140px; height: 140px; }
+    .hero-avatar { width: 140px; }
+    .hero-coord { top: 78px; }
 }
 
 @media (max-width: 480px) {
-    .hero { padding-top: 72px; }
-    .hero-right h1 { font-size: 1.5rem; }
-    .avatar-placeholder, .hero-img { width: 110px; height: 110px; }
-    .hero-bio { font-size: 0.88rem; }
-    .btn-main { padding: 10px 24px; font-size: 0.88rem; }
-}
-
-@media (min-width: 1400px) {
-    .hero-content { max-width: 1200px; gap: 80px; }
-    .avatar-placeholder, .hero-img { width: 220px; height: 220px; }
-    .hero-right h1 { font-size: 2.8rem; }
-    .hero-bio { font-size: 1.05rem; max-width: 560px; }
+    .hero { padding: 84px 6% 48px; }
+    .avatar-placeholder { width: 120px; height: 120px; }
+    .hero-avatar { width: 120px; }
+    .hero-bio { font-size: 0.82rem; }
+    .hero-coord { font-size: 0.54rem; top: 72px; }
 }

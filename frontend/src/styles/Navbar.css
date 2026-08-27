@@ -1,122 +1,132 @@
-/* Estilos de la barra de navegación */
+/* ── Navbar tipo HUD: sólida, sin blur, regla inferior ── */
 .navbar {
     position: fixed;
     top: 0;
+    left: 0;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 5%;
-    background: var(--bg-navbar);
-    border-bottom: 1px solid var(--navbar-border);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
+    padding: 12px 5%;
+    background: var(--surface);
+    border-bottom: 1px solid var(--rule);
     z-index: 1000;
     box-sizing: border-box;
 }
 
-/* Logo de la navbar */
+/* Logo / identidad */
 .logo {
-    align-items: center;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: var(--primary);
-    text-shadow: 0 0 6px rgba(0,0,0,0.15);
-    display: flex;
-
-}
-
-
-.edit-proyectos button {
-    /* Dimensiones adaptables */
-    width: 2px; 
-    height: 100%;
-    min-height: 20px; /* Asegura un mínimo de altura si el nav es muy delgado */
-    padding: 0;
-    margin: 0 10px;  /* Espaciado lateral para que no se pegue a otros elementos */
-    
-    /* Camuflaje visual */
-    background: var(--primary);
-    border: none;
-    align-self: stretch; 
-
-    /* Forma */
-    border-radius: 1px;
-    
-    /* Interacción */
-    cursor: default;
-    transition: background 0.4s ease, opacity 0.4s ease;
-    outline: none;
-    
-    /* Importante: para que no empuje otros elementos */
-    flex-shrink: 0; 
-}
-
-/* Opcional: que brille un poco al pasar el mouse para que tú lo encuentres */
-.edit-proyectos button:hover {
-    background: var(--secondary); /* O un color ligeramente distinto */
-    opacity: 0.8;
-}
-.navbar-right {
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 10px;
 }
+
 #iniciales {
-    width: 40px;
-    height: 37px;
-    background: var(--primary);
-    color: var(--on-primary);
+    width: 38px;
+    height: 38px;
+    background: var(--accent);
+    color: var(--on-accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    border-top-left-radius: 40%;
-    border-bottom-left-radius: 40%;
-    font-size: 1.2rem;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 9px), calc(100% - 9px) 100%, 0 100%);
 }
-/* Botón de cambio de tema */
-#tema_Change {
-    position: relative;
-    width: 67px;
-    height: 37px;
-    background: none;
-    border: 2px solid var(--primary);
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    color: var(--primary);
-    font-weight: bold;
+
+.nav-name {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--text);
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+/* Acceso admin — botón camuflado tipo "slider" */
+.edit-proyectos button {
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 0;
     cursor: pointer;
-    transition: 0.3s;
-    overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s ease;
 }
 
-/* Pelota del toggle */
-#tema_Change::before {
-    content: "";
+.edit-proyectos button::before {
+    content: '';
     position: absolute;
-    top: 50%;
-    left: 6px;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--primary);
-    transition: left 0.3s ease;
+    left: 5px;
+    right: 5px;
+    top: 7px;
+    height: 4px;
+    background:
+        linear-gradient(var(--dim) 0 0) center/100% 1px no-repeat,
+        linear-gradient(var(--dim) 0 0) center/100% 1px no-repeat,
+        linear-gradient(var(--dim) 0 0) center/100% 1px no-repeat;
+    background-position: 0 0, 0 50%, 0 100%;
 }
 
-/* Posición de la pelota en tema claro */
-#tema_Change.right::before {
-    left: calc(100% - 30px);
+.edit-proyectos button:hover { border-color: var(--accent); }
+
+.navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Reloj digital */
+/* Reloj de sistema */
 .reloj-display {
-    font-family: 'Courier New', monospace;
-    font-size: 1.5rem;
-    color: var(--on-surface);
-    text-shadow: 0 0 2px rgba(0,0,0,0.35);
-    border: 2px solid var(--primary);
-    padding: 5px 15px;
-    border-radius: 5px;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text);
+    border: 1px solid var(--rule);
+    padding: 7px 12px;
+    letter-spacing: 0.10em;
+    background: var(--card);
 }
 
+/* ── Toggle de tema: interruptor cuadrado con etiquetas ── */
+#tema_Change {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    height: 28px;
+    padding: 0 9px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    border-radius: 0;
+    color: var(--dim);
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+}
+
+#tema_Change:hover { border-color: var(--accent); }
+
+.toggle-label {
+    font-family: var(--font-mono);
+    font-size: 0.60rem;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+}
+
+.toggle-block {
+    width: 10px;
+    height: 10px;
+    background: var(--accent);
+    transition: transform 0.2s ease;
+}
+
+#tema_Change .toggle-block { transform: translateX(9px); }
+#tema_Change.right .toggle-block { transform: translateX(-9px); }
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+    .nav-name { display: none; }
+    .status-text { display: none; }
+    .navbar { padding: 10px 4%; }
+}

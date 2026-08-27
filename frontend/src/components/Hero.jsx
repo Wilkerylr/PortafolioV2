@@ -2,26 +2,40 @@ import AvatarPlaceholder from './AvatarPlaceholder.jsx';
 import '../styles/Hero.css';
 
 // Componente de sección hero con presentación personal
-// Recibe theme desde App para mantener una sola fuente de verdad
 const Hero = ({ theme }) => {
   return (
     <section id="inicio" className="hero">
+      <span className="hero-coord" aria-hidden="true">COORD 10.48°N · 66.90°W</span>
+
       <div className="hero-content">
-        {/* Avatar de perfil - reemplazar AvatarPlaceholder por <img> cuando tengas foto */}
-        <div className="hero-left">
+        {/* Tarjeta de identificación */}
+        <div className="hero-avatar">
           <AvatarPlaceholder theme={theme} />
+          <span className="hero-avatar-id">TAG_01 · PERFIL</span>
         </div>
 
-        {/* Texto de presentación */}
+        {/* Presentación */}
         <div className="hero-right">
-          <h1>Hola, soy <span className="highlight">Wilker Lopez</span></h1>
+          <p className="hero-kicker">&gt; HOLA, SOY</p>
+          <h1>
+            Wilker <span className="hl">Lopez</span>
+            <span className="cursor" aria-hidden="true">▊</span>
+          </h1>
+
           <div className="hero-tags">
-            <span>⚡ Técnico en Electrónica</span>
-            <span>🐍 Python Certificado</span>
-            <span>⚛️ React Dev</span>
+            <span>Técnico en Electrónica</span>
+            <span>Python Certificado</span>
+            <span>React Dev</span>
           </div>
-          <p className="hero-bio">Más de 3 años en sistemas de control de acceso. Programador certificado en Python con manejo de bases de datos y APIs. Actualmente especializándome en desarrollo web Fullstack con React y Node.js.</p>
-          <a href="#repositorios" className="btn-main">Ver Repositorios</a>
+
+          <p className="hero-bio">
+            Más de 3 años en sistemas de control de acceso. Programador
+            certificado en Python con manejo de bases de datos y APIs.
+            Actualmente especializándome en desarrollo web Fullstack
+            con React y Node.js.
+          </p>
+
+          <a href="#repositorios" className="btn btn--accent">Ver repositorios_</a>
         </div>
       </div>
     </section>

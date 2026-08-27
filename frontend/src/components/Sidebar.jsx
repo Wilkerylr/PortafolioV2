@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import LoginForm from './LoginForm.jsx';
-//import AdminOptions from './AdminOptions';
 import '../styles/Sidebar.css';
-import '../styles/global.css';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

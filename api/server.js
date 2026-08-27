@@ -58,8 +58,8 @@ app.get('/saludo', verificarToken, async (req, res) => {
   res.json({ saludo: 'Hola, este es un saludo desde mi API', usuario });
 });
 
-//Crea un nuevo proyecto en Supabase
-app.post('/api/proyectos/create',async (req, res) => {
+//Crea un nuevo proyecto en Supabase (requiere autenticación)
+app.post('/api/proyectos/create', verificarToken, async (req, res) => {
   try {
     const {data, error} = await supabase
       .from('Proyectos')
@@ -157,7 +157,7 @@ app.get('/api/proyectos/:id', async (req, res) => {
 });
 
 // Elimina un proyecto por ID
-app.delete('/api/proyectos/:id', async (req, res) => {
+app.delete('/api/proyectos/:id', verificarToken, async (req, res) => {
   try {
     const {data, error} = await supabase
       .from('Proyectos')
@@ -165,15 +165,14 @@ app.delete('/api/proyectos/:id', async (req, res) => {
       .eq('id', req.params.id);
 
     if (error) throw error;
-    res.json({ message: 'Proyecto eliminado', proyectos: data });
-    res.status(200).json({ proyectos: data });
+    res.status(200).json({ message: 'Proyecto eliminado', proyectos: data });
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
 
-app.put('/api/proyectos/:id', async (req, res) => {
+app.put('/api/proyectos/:id', verificarToken, async (req, res) => {
   try {
     const {data, error} = await supabase
       .from('Proyectos')

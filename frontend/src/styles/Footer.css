@@ -1,11 +1,11 @@
-/* ── Footer — surface-deep, cierre con peso visual ── */
+/* ── Footer — surface-deep, cierre con regla técnica ── */
 .footer {
     width: 100%;
     background: var(--surface-deep);
+    border-top: 3px dashed var(--accent);
     box-sizing: border-box;
 }
 
-/* Grid de 3 columnas */
 .footer-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -14,35 +14,38 @@
     align-items: center;
 }
 
-/* ── Columna izquierda: identidad ── */
+/* ── Identidad ── */
 .footer-col--identity {
     display: flex;
     flex-direction: column;
     gap: 12px;
 }
 
-/* Monograma */
 .footer-logo {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 1.4rem;
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
     font-weight: 800;
-    letter-spacing: -0.04em;
-    background: var(--cta-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    line-height: 1;
+    letter-spacing: 0.02em;
+    color: var(--on-accent);
+    background: var(--accent);
+    display: inline-flex;
+    width: 52px;
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
 }
 
 .footer-tagline {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 0.78rem;
-    color: var(--on-dim);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.10em;
+    color: var(--dim);
     line-height: 1.6;
     margin: 0;
 }
 
-/* ── Columna central: disponibilidad ── */
+/* ── Disponibilidad ── */
 .footer-col--center {
     display: flex;
     flex-direction: column;
@@ -53,40 +56,40 @@
 .footer-status {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    background: var(--card-bg);
-    padding: 7px 16px;
-    border-radius: 9999px;
-    font-family: 'Space Grotesk', 'Courier New', monospace;
-    font-size: 0.72rem;
-    font-weight: 600;
-    letter-spacing: 0.04rem;
+    gap: 9px;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    padding: 8px 14px;
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--on-surface);
+    color: var(--text);
 }
 
 .footer-status-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--primary);
+    width: 9px;
+    height: 9px;
+    background: var(--accent);
     flex-shrink: 0;
-    animation: footer-pulse 2.4s ease-in-out infinite;
+    animation: led-blink 1.4s steps(2, start) infinite;
 }
 
-@keyframes footer-pulse {
-    0%, 100% { opacity: 1;   transform: scale(1); }
-    50%       { opacity: 0.3; transform: scale(1.6); }
+@keyframes led-blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0.15; }
 }
 
 .footer-location {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 0.80rem;
-    color: var(--on-dim);
+    font-family: var(--font-mono);
+    font-size: 0.70rem;
+    letter-spacing: 0.12em;
+    color: var(--dim);
     margin: 0;
 }
 
-/* ── Columna derecha: contacto ── */
+/* ── Contacto ── */
 .footer-col--contact {
     display: flex;
     flex-direction: column;
@@ -95,73 +98,76 @@
 }
 
 .footer-contact-label {
-    font-family: 'Space Grotesk', 'Courier New', monospace;
-    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
     font-weight: 700;
-    letter-spacing: 0.10rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--on-muted);
+    color: var(--accent);
     margin: 0;
 }
 
 .footer-email {
-    font-family: 'Inter', 'Segoe UI', sans-serif;
-    font-size: 0.88rem;
+    font-family: var(--font-mono);
+    font-size: 0.80rem;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--text);
     text-decoration: none;
-    transition: opacity 0.2s ease;
+    border-bottom: 1px solid var(--rule);
+    transition: border-color 0.2s ease, color 0.2s ease;
     word-break: break-all;
     text-align: right;
 }
 
-.footer-email:hover { opacity: 0.70; }
+.footer-email:hover {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
 
-/* ── Línea inferior: copyright ── */
+/* ── Línea inferior ── */
 .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 8%;
-    background: rgba(0, 0, 0, 0.20);
-    font-family: 'Space Grotesk', 'Courier New', monospace;
-    font-size: 0.68rem;
-    color: var(--on-muted);
-    letter-spacing: 0.03rem;
+    gap: 16px;
+    padding: 14px 8%;
+    border-top: 1px solid var(--rule);
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.10em;
+    color: var(--muted);
     box-sizing: border-box;
 }
 
+.footer-eof {
+    color: var(--accent);
+}
+
 .footer-stack {
-    color: var(--on-dim);
-    letter-spacing: 0.06rem;
+    color: var(--dim);
 }
 
 /* ── Responsive ── */
 @media (max-width: 768px) {
     .footer-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 24px;
         padding: 28px 6%;
         text-align: center;
     }
     .footer-col--center { align-items: center; }
     .footer-col--contact { align-items: center; }
+    .footer-logo { margin: 0 auto; }
     .footer-email { text-align: center; }
     .footer-bottom {
         flex-direction: column;
-        gap: 4px;
-        padding: 12px 6%;
+        gap: 6px;
+        padding: 14px 6%;
         text-align: center;
     }
 }
 
 @media (max-width: 480px) {
     .footer-grid { padding: 24px 5%; }
-    .footer-logo { font-size: 1.2rem; }
-    .footer-bottom { padding: 10px 5%; font-size: 0.62rem; }
-}
-
-@media (min-width: 1400px) {
-    .footer-grid { padding: 40px 12%; }
-    .footer-bottom { padding: 14px 12%; }
+    .footer-bottom { padding: 12px 5%; font-size: 0.56rem; }
 }
