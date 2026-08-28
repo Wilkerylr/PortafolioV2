@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import SectionHeader from './SectionHeader.jsx';
 import { useSkills } from '../hooks/useSkills';
 import '../styles/Technologies.css';
@@ -7,6 +8,11 @@ const totalSkills = (categories) =>
 
 const Technologies = () => {
   const { categories, loading, error, retry } = useSkills();
+  const [openSkills, setOpenSkills] = useState({});
+
+  const toggleSkill = (key) => {
+    setOpenSkills((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
 
   return (
     <section id="tecnologias" className="skills-section">
@@ -40,15 +46,24 @@ const Technologies = () => {
               <p className="skills-area-title">{cat.title}</p>
               <p className="skills-note">// {cat.allSkills.length} COMPETENCIAS</p>
               <ul className="skills-list">
-                {cat.allSkills.map((skill, i) => (
-                  <li
-                    className="skill-chip"
-                    key={`${cat.title}-${skill.name}-${i}`}
-                    title={skill.description || undefined}
-                  >
-                    {skill.name}
-                  </li>
-                ))}
+                {cat.allSkills.map((skill, i) => {
+                  const key = `${cat.id ?? cat.title}-${skill.name}-${i}`;
+                  const open = Boolean(openSkills[key]);
+                  const hasDetail = Boolean(skill.description);
+                  return (
+                    <li
+                      key={key}
+                      className={`skill-chip${hasDetail ? ' skill-chip--detail' : ''}${open ? ' skill-chip--open' : ''}`}
+                      title={hasDetail ? (open ? 'Cerrar detalle' : 'Ver detalle') : undefined}
+                      onClick={hasDetail ? () => toggleSkill(key) : undefined}
+                    >
+                      {skill.name}
+                      {open && hasDetail && (
+                        <p className="skill-chip-desc">{skill.description}</p>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}
