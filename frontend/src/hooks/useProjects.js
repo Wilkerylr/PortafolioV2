@@ -7,7 +7,7 @@ const API_URL = import.meta.env.VITE_API_URL
 // Normaliza los campos que vienen de Supabase al formato del ProjectCard
 const normalizeProject = (p) => ({
   id: p.id,
-  title: p.titulo || p.title || 'Proyecto sin título',
+  title: p.titulo || p.title || p.nombre || 'Proyecto sin título',
   description: p.descripcion || p.description || 'Sin descripción',
   tags: Array.isArray(p.tags)
     ? p.tags
