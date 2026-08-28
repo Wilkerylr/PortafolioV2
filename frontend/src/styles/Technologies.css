@@ -1,0 +1,116 @@
+/* ── Technologies — paneles por área, estilo ficha técnica ── */
+.skills-section {
+    padding: 72px 11% 40px;
+    background: var(--surface);
+}
+
+.skills-intro {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--dim);
+    margin: 18px 0 0;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px;
+    margin-top: 30px;
+}
+
+.skills-panel {
+    position: relative;
+    background: var(--card);
+    border: 1px solid var(--rule);
+    box-shadow: 5px 5px 0 var(--hard-shadow);
+    padding: 26px;
+    box-sizing: border-box;
+}
+
+/* Marcas de registro TL/BR */
+.skills-panel::before,
+.skills-panel::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+}
+
+.skills-panel::before {
+    top: 6px;
+    left: 6px;
+    border-top: 2px solid var(--accent);
+    border-left: 2px solid var(--accent);
+}
+
+.skills-panel::after {
+    bottom: 6px;
+    right: 6px;
+    border-bottom: 2px solid var(--accent);
+    border-right: 2px solid var(--accent);
+}
+
+.skills-area-title {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--rule);
+}
+
+.skills-note {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    letter-spacing: 0.06em;
+    color: var(--dim);
+    margin: 12px 0 18px;
+}
+
+.skills-list {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+    margin: 0;
+    padding: 0;
+}
+
+.skill-chip {
+    font-family: var(--font-mono);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text);
+    background: var(--inset);
+    border: 1px solid var(--rule);
+    padding: 7px 12px;
+}
+
+.skill-chip::before {
+    content: '#';
+    color: var(--accent);
+    margin-right: 6px;
+}
+
+.skills-panel:hover .skill-chip {
+    border-color: var(--accent);
+    transition: border-color 0.2s ease;
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+    .skills-section { padding: 56px 6% 40px; }
+    .skills-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .skills-section { padding: 48px 5% 40px; }
+    .skills-panel { padding: 20px; }
+    .skill-chip { font-size: 0.58rem; }
+}

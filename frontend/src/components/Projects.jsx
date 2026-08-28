@@ -7,7 +7,7 @@ const Projects = () => {
 
   return (
     <section id="proyectos" className="proyectos-section">
-      <SectionHeader index="01" title="Proyectos" note="// fuente: api.proyectos" />
+      <SectionHeader index="02" title="Proyectos" note="// fuente: api.proyectos" />
 
       {loading && (
         <p className="proyectos-aviso" role="status">

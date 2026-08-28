@@ -8,7 +8,7 @@ const Repositories = () => {
 
   return (
     <section id="repositorios" className="repositorios">
-      <SectionHeader index="02" title="Repositorios" note="// fuente: api.github" />
+      <SectionHeader index="03" title="Repositorios" note="// fuente: api.github" />
 
       {loading && (
         <p className="repo-status" role="status">

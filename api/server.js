@@ -211,6 +211,65 @@ app.get('/api/repos', async (req, res) => {
   }
 });
 
+// Habilidades agrupadas por tipo, consultando Supabase
+app.get('/api/skills', async (req, res) => {
+  try {
+    const [tiposRes, tecnicasRes] = await Promise.all([
+      supabase
+        .from('tipo')
+        .select('id, nombre_tipo, tipos_tags ( tags ( nombre ) )')
+        .order('id', { ascending: true }),
+      supabase
+        .from('habilidades_tecnicas')
+        .select('nombre, categoria, descripcion')
+        .order('nombre', { ascending: true }),
+    ]);
+
+    if (tiposRes.error || tecnicasRes.error) {
+      throw tiposRes.error || tecnicasRes.error;
+    }
+
+    const tipos = tiposRes.data || [];
+    const tecnicas = tecnicasRes.data || [];
+
+    const respuestaFinal = tipos.map((cat) => {
+      const titulo = (cat.nombre_tipo || '').toLowerCase();
+
+      // Etiquetas de proyectos registradas para ese tipo
+      const tags = (cat.tipos_tags || [])
+        .map((rel) => rel.tags?.nombre)
+        .filter(Boolean)
+        .map((name) => ({ name, description: null }));
+
+      // Habilidades técnicas propias por categoría
+      const propias = tecnicas
+        .filter((h) => {
+          const c = (h.categoria || '').toLowerCase();
+          if (titulo === 'backend' || titulo === 'frontend') {
+            return c === 'programación' || c === 'programacion';
+          }
+          if (titulo === 'electronica') {
+            return ['electrónica', 'electronica', 'sistemas/iot', 'seguridad/iot'].includes(c);
+          }
+          if (titulo === 'herramientas') return c === 'herramientas';
+          return false;
+        })
+        .map((h) => ({ name: h.nombre, description: h.descripcion }));
+
+      return {
+        id: cat.id,
+        title: cat.nombre_tipo,
+        allSkills: [...tags, ...propias],
+      };
+    });
+
+    res.status(200).json(respuestaFinal);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {

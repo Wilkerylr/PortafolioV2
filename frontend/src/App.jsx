@@ -1,6 +1,7 @@
 import { useTheme } from './hooks/useTheme';
 import Navbar from './components/Navbar.jsx';
 import Hero from './components/Hero.jsx';
+import Technologies from './components/Technologies.jsx';
 import Projects from './components/Projects.jsx';
 import Repositories from './components/Repositories.jsx';
 import Footer from './components/Footer.jsx';
@@ -14,6 +15,7 @@ function App() {
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <Hero theme={theme} />
+        <Technologies />
         <Projects />
         <Repositories />
         <Footer />

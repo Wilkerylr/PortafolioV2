@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import AvatarPlaceholder from './AvatarPlaceholder.jsx';
+import fotoTraje from '../assets/FotoTraje.jpg';
 import '../styles/Hero.css';
 
 // Componente de sección hero con presentación personal
 const Hero = ({ theme }) => {
+  const [fotoError, setFotoError] = useState(false);
+
   return (
     <section id="inicio" className="hero">
       <span className="hero-coord" aria-hidden="true">COORD 10.48°N · 66.90°W</span>
@@ -10,7 +14,16 @@ const Hero = ({ theme }) => {
       <div className="hero-content">
         {/* Tarjeta de identificación */}
         <div className="hero-avatar">
-          <AvatarPlaceholder theme={theme} />
+          {fotoError ? (
+            <AvatarPlaceholder theme={theme} />
+          ) : (
+            <img
+              src={fotoTraje}
+              alt="Wilker Lopez — Técnico en Electrónica y Programador"
+              className="hero-photo"
+              onError={() => setFotoError(true)}
+            />
+          )}
           <span className="hero-avatar-id">TAG_01 · PERFIL</span>
         </div>
 
